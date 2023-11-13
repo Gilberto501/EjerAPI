@@ -1,26 +1,22 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const port =  3002; //establecemos como constante un puerto
 
-app.get('/', function(req, res){
-    res.send('mi primera api');
+//para permitir el manejo de POST y  PUT
+const bodyParser = require('body-parser');
+const routes = ('./routes/routes');
+const app=express();
 
+//usae Node.js body parsing middleware
+app.use(bodyParser.json())
+app.use(bodyParser.urlencoded({
+    extended: true,
+}));
+
+routes(app);
+
+//iniciar servidor 
+const server = app.listen(port,(console)=> {
+    if(error) return console.log('Error: ${error}');
+
+    console.log('El servidor escucha en el puerto ${server.address().port}')
 });
-app.get('/saludo', function(req, res){
-    res.send('Hola mundo');
-
-});
-app.get('/despedida', function(req, res){
-    res.send('adios mundo cruel');
-
-});
-app.get('/despedida/familia', function(req, res){
-    res.send('los quiero mucho a todos');
-
-});
-app.get('/despedida/empleados', function(req, res){
-    res.send('ojala se rompan una pierna');
-
-});
-app.listen(3000, function(){
-    console.log('Aplicacion ejemplo, escuchando el puerto 3000')
-})
