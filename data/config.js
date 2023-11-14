@@ -4,12 +4,13 @@ const mysql = require ('mysql');
 
 const config = {
     host:'localhost',
-    user:'root',
-    passqord: 'root',
+    user:'Gilberto',
+    password: 'qwerty1',
     database:'api',
 }
 
 //create a MyAQL
 const pool = mysql.createPool(config);
 
-//Export
+//Export the pool
+module.exports = pool;
